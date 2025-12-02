@@ -6,12 +6,12 @@ Users speak naturally, and the assistant responds with helpful weather insights 
 
 📑 Table of Contents
 
-1.Overview
-2.Features
-3.Architecture
-4.Tech Stack
-5.Backend Setup (Agent Server)
-6.How It Works
+1.Overview <br/>
+2.Features <br/>
+3.Architecture <br/>
+4.Tech Stack <br/>
+5.Backend Setup (Agent Server) <br/>
+6.How It Works <br/>
 7.API Tools
 
 🔍 Overview
@@ -19,23 +19,23 @@ Users speak naturally, and the assistant responds with helpful weather insights 
 This project is a voice-operated weather assistant built on LiveKit’s Agents framework.
 Users speak commands like:
 
->“What’s the weather in Pune?”
->“Will it rain tomorrow in Bangalore?”
->“Is it going to rain on Friday in Pune?”
+>“What’s the weather in Pune?” <br/>
+>“Will it rain tomorrow in Bangalore?” <br/>
+>“Is it going to rain on Friday in Pune?” <br/>
 
 The system extracts locations and dates using simple NLP, calls WeatherAPI, and responds with TTS(Text to speech) in real time.
 
 ✨ Features
 
-> Real-time voice communication using LiveKit
-> Weather lookup via WeatherAPI
-> Rain forecasting with smart day-offset handling
-> Location extraction using regex-based NLP
-> Wake-free turn detection (silero VAD + multilingual turn detector)
-> Tools system (@function_tool) for LLM function calling
-> Streaming STT (AssemblyAI) + TTS (Cartesia Sonic-3)
-> Gemini 2.5 Flash LLM for conversational logic
-> Next.js frontend provided by LiveKit starter kit
+> Real-time voice communication using LiveKit <br/>
+> Weather lookup via WeatherAPI <br/>
+> Rain forecasting with smart day-offset handling <br/>
+> Location extraction using regex-based NLP <br/>
+> Wake-free turn detection (silero VAD + multilingual turn detector) <br/>
+> Tools system (@function_tool) for LLM function calling <br/>
+> Streaming STT (AssemblyAI) + TTS (Cartesia Sonic-3) <br/>
+> Gemini 2.5 Flash LLM for conversational logic <br/>
+> Next.js frontend provided by LiveKit starter kit <br/>
 
 🏗 Architecture
 
@@ -56,19 +56,21 @@ WeatherAPI
 
 🧰 Tech Stack
 
-Backend (Agent Server)
-1.Python
-2.LiveKit Agents SDK
-3.AssemblyAI STT
-4.Cartesia Sonic TTS
-5.Google Gemini 2.5 Flash LLM
-6.WeatherAPI
-7.Silero VAD
+Backend (Agent Server):
+
+1.Python <br/>
+2.LiveKit Agents SDK <br/>
+3.AssemblyAI STT <br/>
+4.Cartesia Sonic TTS <br/>
+5.Google Gemini 2.5 Flash LLM <br/>
+6.WeatherAPI <br/>
+7.Silero VAD <br/>
 8.LiveKit Turn Detector (MultilingualModel)
 
-Frontend
-1.Next.js (LiveKit starter kit)
-2.Typescript
+Frontend:
+
+1.Next.js (LiveKit starter kit) <br/>
+2.Typescript <br/>
 3.WebRTC audio through LiveKit Browser SDK
 
 ⚙ Backend Setup (Agent Server)
@@ -148,16 +150,16 @@ getweather(location: str)
 
 Returns:
 
-Condition
-Temperature
-Humidity
+Condition,
+Temperature,
+Humidity,
 Wind speed
 
 getForecast(location: str, day: int)
 
 Returns:
 
-Will it rain?
-Forecast summary
-Chance of rain
+Will it rain? ,
+Forecast summary ,
+Chance of rain ,
 Both hit WeatherAPI with proper error handling.
