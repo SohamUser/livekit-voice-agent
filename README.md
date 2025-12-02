@@ -143,16 +143,27 @@ Cartesia Sonic-3 voice reads the response aloud.
 🧩 API Tools
 
 The agent exposes two function tools:
+
 getweather(location: str)
+
 Returns:
+
 Condition
+
 Temperature
+
 Humidity
+
 Wind speed
 
 getForecast(location: str, day: int)
+
 Returns:
+
 Will it rain?
+
 Forecast summary
+
 Chance of rain
+
 Both hit WeatherAPI with proper error handling.
