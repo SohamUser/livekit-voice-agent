@@ -164,6 +164,7 @@ async def my_agent(ctx: agents.JobContext):
             return m[-1]
         return None
 
+    # --- Extraction of day (today ,tomorrow etc.) or weekdays ---
     def extract_day_offset(text: str) -> int:
         text_l = text.lower()
         if "today" in text_l:
@@ -182,12 +183,17 @@ async def my_agent(ctx: agents.JobContext):
                 return delta
         return 1
 
+    # Callback that runs whenever a transcript (speech-to-text result) arrives
+
     async def on_transcript_event(transcript):
+
+        # Safely extract text from different possible transcript formats
         text = getattr(transcript, "text", None) or getattr(transcript, "transcript", None) or transcript
         if not text:
             return
         text_l = text.lower()
 
+        # RAIN FORECAST INTENT HANDLING
         if "rain" in text_l:
             location = extract_location_from_text(text) or "your location"
             day = extract_day_offset(text)
@@ -201,9 +207,14 @@ async def my_agent(ctx: agents.JobContext):
                     print("Failed to send getForecast reply:", reply)
             return
 
+        # WEATHER INTENT HANDLING
         if "weather" in text_l:
+
+            # Extract location from the spoken text
             location = extract_location_from_text(text) or "your location"
             reply = await getweather(location)
+
+            # Try sending the assistant response
             try:
                 await session.send_assistant_message(reply)
             except Exception:
@@ -213,13 +224,17 @@ async def my_agent(ctx: agents.JobContext):
                     print("Failed to send getweather reply:", reply)
             return
 
+    # Attaching transcript listeners
     attached = False
+
+    # method 1: using session.on()
     try:
         session.on("transcript", on_transcript_event)
         attached = True
     except Exception:
         pass
-
+    
+    # method 2: using add_transcript_listener()
     if not attached:
         try:
             session.add_transcript_listener(on_transcript_event)
@@ -227,6 +242,7 @@ async def my_agent(ctx: agents.JobContext):
         except Exception:
             pass
 
+    # method 3: manually polling
     if not attached:
         async def poller():
             while True:
@@ -236,13 +252,19 @@ async def my_agent(ctx: agents.JobContext):
                     await asyncio.sleep(0.2)
                     continue
                 text = None
+
+                 # Extract text from event
                 if isinstance(evt, dict):
                     text = evt.get("text") or evt.get("transcript")
                 else:
                     text = getattr(evt, "text", None) or getattr(evt, "transcript", None)
+
+                # If transcript contains weather related words, handle it
                 if text:
                     if "weather" in text.lower() or "rain" in text.lower():
                         await on_transcript_event(text)
+                
+        # Run poller in background
         asyncio.create_task(poller())
 
     # initial greeting
