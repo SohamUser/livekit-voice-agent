@@ -69,6 +69,8 @@ Backend (Agent Server):
 
 Frontend:
 
+Checkout this repository for Frontned to run the agent locally : [https://github.com/livekit-examples/agent-starter-react](https://github.com/livekit-examples/agent-starter-react)
+
 1.Next.js (LiveKit starter kit) <br/>
 2.Typescript <br/>
 3.WebRTC audio through LiveKit Browser SDK
