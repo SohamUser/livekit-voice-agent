@@ -8,9 +8,6 @@ Users speak naturally, and the assistant responds with helpful weather insights 
 
 ## 🎥 Demo Video
 
-> Add your demo link here  
-Example: https://drive.google.com/file/d/10p93BBysYKvqTAJ_bF3wqySLl8Ume-cS/view?usp=sharing
-
 [![Implementation Video](./screenshots/thumbnail.jpg)](https://drive.google.com/file/d/10p93BBysYKvqTAJ_bF3wqySLl8Ume-cS/view?usp=sharing)
 
 ---
