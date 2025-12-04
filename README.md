@@ -1,103 +1,123 @@
-🌤️ LiveKit Weather Voice Assistant
+# 🌤️ LiveKit Weather Voice Assistant
 
 A real-time, voice-interactive AI assistant that provides current weather and rain forecasts using WeatherAPI, powered by LiveKit Agents, multilingual VAD, TTS/STT, and a Next.js frontend.
 
 Users speak naturally, and the assistant responds with helpful weather insights — all streamed live over WebRTC.
 
-📑 Table of Contents
+---
 
-1.Overview <br/>
-2.Features <br/>
-3.Architecture <br/>
-4.Tech Stack <br/>
-5.Backend Setup (Agent Server) <br/>
-6.How It Works <br/>
-7.API Tools
+## 🎥 Demo Video
 
-🔍 Overview
+> Add your demo link here  
+Example: https://your-demo-video-link.com
 
-This project is a voice-operated weather assistant built on LiveKit’s Agents framework.
+---
+
+## 📑 Table of Contents
+
+1. Overview  
+2. Features  
+3. Architecture  
+4. Tech Stack  
+5. Backend Setup (Agent Server)  
+6. How It Works  
+7. API Tools  
+
+---
+
+## 🔍 Overview
+
+This project is a voice-operated weather assistant built on LiveKit’s Agents framework.  
 Users speak commands like:
 
->“What’s the weather in Pune?” <br/>
->“Will it rain tomorrow in Bangalore?” <br/>
->“Is it going to rain on Friday in Pune?” <br/>
+> “What’s the weather in Pune?”  
+> “Will it rain tomorrow in Bangalore?”  
+> “Is it going to rain on Friday in Pune?”
 
 The system extracts locations and dates using simple NLP, calls WeatherAPI, and responds with TTS(Text to speech) in real time.
 
-✨ Features
+---
 
-> Real-time voice communication using LiveKit <br/>
-> Weather lookup via WeatherAPI <br/>
-> Rain forecasting with smart day-offset handling <br/>
-> Location extraction using regex-based NLP <br/>
-> Wake-free turn detection (silero VAD + multilingual turn detector) <br/>
-> Tools system (@function_tool) for LLM function calling <br/>
-> Streaming STT (AssemblyAI) + TTS (Cartesia Sonic-3) <br/>
-> Gemini 2.5 Flash LLM for conversational logic <br/>
-> Next.js frontend provided by LiveKit starter kit <br/>
+## ✨ Features
 
-🏗 Architecture
+> Real-time voice communication using LiveKit  
+> Weather lookup via WeatherAPI  
+> Rain forecasting with smart day-offset handling  
+> Location extraction using regex-based NLP  
+> Wake-free turn detection (silero VAD + multilingual turn detector)  
+> Tools system (@function_tool) for LLM function calling  
+> Streaming STT (AssemblyAI) + TTS (Cartesia Sonic-3)  
+> Gemini 2.5 Flash LLM for conversational logic  
+> Next.js frontend provided by LiveKit starter kit  
 
-Client (Next.js)
-→ Connects to LiveKit room
-→ Sends microphone audio
-→ Plays assistant responses
+---
 
-LiveKit Agent Server
-→ Listens to user transcripts
-→ Extracts information (weather forecast)
-→ Calls WeatherAPI via tools
-→ Generates spoken response
+## 🏗 Architecture
 
-WeatherAPI
-→ Provides current conditions & forecast
+**Client (Next.js)**  
+→ Connects to LiveKit room  
+→ Sends microphone audio  
+→ Plays assistant responses  
 
+**LiveKit Agent Server**  
+→ Listens to user transcripts  
+→ Extracts information (weather forecast)  
+→ Calls WeatherAPI via tools  
+→ Generates spoken response  
 
-🧰 Tech Stack
+**WeatherAPI**  
+→ Provides current conditions & forecast  
 
-Backend (Agent Server):
+---
 
-1.Python <br/>
-2.LiveKit Agents SDK <br/>
-3.AssemblyAI STT <br/>
-4.Cartesia Sonic TTS <br/>
-5.Google Gemini 2.5 Flash LLM <br/>
-6.WeatherAPI <br/>
-7.Silero VAD <br/>
-8.LiveKit Turn Detector (MultilingualModel)
+## 🧰 Tech Stack
 
-Frontend:
+### Backend (Agent Server)
 
-Checkout this repository for Frontned to run the agent locally : [https://github.com/livekit-examples/agent-starter-react](https://github.com/livekit-examples/agent-starter-react)
+1. Python  
+2. LiveKit Agents SDK  
+3. AssemblyAI STT  
+4. Cartesia Sonic TTS  
+5. Google Gemini 2.5 Flash LLM  
+6. WeatherAPI  
+7. Silero VAD  
+8. LiveKit Turn Detector (MultilingualModel)  
 
-1.Next.js (LiveKit starter kit) <br/>
-2.Typescript <br/>
-3.WebRTC audio through LiveKit Browser SDK
+### Frontend
 
-⚙ Backend Setup (Agent Server)
+Checkout this repository for Frontned to run the agent locally:  
+https://github.com/livekit-examples/agent-starter-react
 
-1.Clone this repository
+1. Next.js (LiveKit starter kit)  
+2. Typescript  
+3. WebRTC audio through LiveKit Browser SDK  
 
-2.Change the directory:
+---
+
+## ⚙ Backend Setup (Agent Server)
+
+1. Clone this repository  
+
+2. Change the directory:
 ```bash
 cd livekit-voice-agent
 ```
 
-3.Setup Python Virtual Environment:
+3. Setup Python Virtual Environment:
 
-For mac:
+**For mac:**
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 ```
-For Windows:
+
+**For Windows:**
 ```bash
 python -m venv .venv
 .venv\Scripts\activate
 ```
 
-4.Install Dependencies:
+4. Install Dependencies:
 ```bash
 uv pip install -r pyproject.toml
 ```
@@ -105,63 +125,69 @@ OR
 ```bash
 pip install .
 ```
-5.Set Environment by making .env.local file and paste your environment variables:
-```bash
+
+5. Set Environment by making .env.local file and paste your environment variables:
+```
 LIVEKIT_URL=
 LIVEKIT_API_KEY=
 LIVEKIT_API_SECRET=
 OPENWEATHER_API_KEY=
 WEATHERAPI_KEY=
 ```
-6.Run assistant:
+
+6. Run assistant:
 ```bash
 python agent.py download-files
 python agent.py dev
 ```
 
-🧠 How It Works
-1. STT Transcription
+---
+
+## 🧠 How It Works
+
+1. **STT Transcription**  
 AssemblyAI streams text to the agent in real time.
 
-2. Intent Detection
-The agent listens for:
-"weather" → calls getweather()
-"rain" → calls getForecast()
+2. **Intent Detection**  
+The agent listens for:  
+"weather" → calls getweather()  
+"rain" → calls getForecast()  
 
-3. NLP Extraction
-Regex-based extractors pull:
-Location names
+3. **NLP Extraction**  
+Regex-based extractors pull:  
+Location names  
 Day offsets (today, tomorrow, weekdays)
 
-4. API Tool Call
-WeatherAPI endpoints:
-current.json
-forecast.json
+4. **API Tool Call**  
+WeatherAPI endpoints:  
+current.json  
+forecast.json  
 
-5. LLM Response
+5. **LLM Response**  
 Gemini 2.5 Flash composes a concise natural-language answer.
 
-6. TTS
+6. **TTS**  
 Cartesia Sonic-3 voice reads the response aloud.
 
-🧩 API Tools
+---
+
+## 🧩 API Tools
 
 The agent exposes two function tools:
 
-getweather(location: str)
+### getweather(location: str)
+Returns:  
+Condition,  
+Temperature,  
+Humidity,  
+Wind speed  
 
-Returns:
+### getForecast(location: str, day: int)
+Returns:  
+Will it rain?,  
+Forecast summary,  
+Chance of rain,  
+Both hit WeatherAPI with proper error handling.  
 
-Condition,
-Temperature,
-Humidity,
-Wind speed
+---
 
-getForecast(location: str, day: int)
-
-Returns:
-
-Will it rain? ,
-Forecast summary ,
-Chance of rain ,
-Both hit WeatherAPI with proper error handling.
